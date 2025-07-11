@@ -29,6 +29,7 @@ function App() {
         age={33}
         bio="An avid explorer of new places and a passionate photographer. Always ready for the next adventure!"
       />
+            <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
       <Footer />
   
     </div>
