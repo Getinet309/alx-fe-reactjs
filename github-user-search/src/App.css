@@ -1,52 +1,93 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body {
+  font-family: sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
 
-<<<<<<< HEAD
 .App {
-  font-family: Arial, sans-serif;
+  text-align: center;
+  padding-top: 50px;
 }
 
 .App-header {
-  padding-bottom: 20px;
-}
-=======
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  margin-bottom: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.search-container form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 
-.card {
-  padding: 2em;
+.search-container input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  flex-grow: 1;
 }
 
-.read-the-docs {
-  color: #888;
+.search-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #0366d6;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
 }
->>>>>>> 753b13b23efd865d871b322ae110f74be5d81ea7
+
+.search-container button:hover {
+  background-color: #0056b3;
+}
+
+.results-container {
+  margin-top: 20px;
+}
+
+.error {
+  color: #d73a49;
+}
+
+.user-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.user-card h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.user-card a {
+  margin-top: 5px;
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.user-card a:hover {
+  text-decoration: underline;
+}
