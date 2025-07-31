@@ -1,3 +1,15 @@
-// src/services/githubService.js (Future Step)
-const API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY;
-console.log(API_KEY); // This would log the value from your .env file.
+import axios from 'axios';
+
+const GITHUB_API_BASE_URL = 'https://api.github.com/users/';
+
+export const fetchUserData = async (username) => {
+  try {
+    const response = await axios.get(`${GITHUB_API_BASE_URL}${username}`);
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.status === 404) {
+      throw new Error('User not found');
+    }
+    throw error;
+  }
+};
