@@ -2,14 +2,21 @@ import React, { useState } from 'react';
 import { searchUsers } from '../services/githubService';
 
 const Search = () => {
+  // State variables for the search form inputs
   const [username, setUsername] = useState('');
   const [location, setLocation] = useState('');
   const [minRepos, setMinRepos] = useState('');
+
+  // State variables for the search results and API status
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [nextPage, setNextPage] = useState(null);
 
+  /**
+   * Handles the form submission for the advanced search.
+   * @param {Event} e - The form submission event.
+   */
   const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -27,14 +34,19 @@ const Search = () => {
       setNextPage(nextPageLink);
     } catch (err) {
       setError('Looks like we cannot find any users with those criteria.');
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
+  /**
+   * Handles loading more results from the next page of the API.
+   */
   const loadMore = async () => {
     setLoading(true);
     try {
+      // Pass the next page URL to the searchUsers service
       const { items, nextPageLink } = await searchUsers({
         username,
         location,
@@ -45,6 +57,7 @@ const Search = () => {
       setNextPage(nextPageLink);
     } catch (err) {
       setError('Failed to load more users.');
+      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -52,6 +65,7 @@ const Search = () => {
 
   return (
     <div className="container mx-auto p-4 md:p-8">
+      {/* Search Form */}
       <form onSubmit={handleSearch} className="bg-white p-6 rounded-lg shadow-md mb-8">
         <h2 className="text-2xl font-bold mb-4">Advanced GitHub User Search</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -85,6 +99,7 @@ const Search = () => {
         </button>
       </form>
 
+      {/* Loading, Error, and Results Display */}
       {loading && <p className="text-center text-blue-600 my-4">Loading...</p>}
       {error && <p className="text-center text-red-600 my-4">{error}</p>}
 
@@ -111,6 +126,7 @@ const Search = () => {
         </div>
       )}
 
+      {/* "Load More" button for pagination */}
       {nextPage && (
         <div className="text-center mt-6">
           <button
