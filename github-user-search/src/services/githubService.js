@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // The base URL for the GitHub Search API for users
-const GITHUB_SEARCH_API_URL = 'https://api.github.com/search/users';
+const GITHUB_SEARCH_API_URL = 'https://api.github.com/search/users?q';
 
 /**
  * Searches for GitHub users based on advanced criteria.
