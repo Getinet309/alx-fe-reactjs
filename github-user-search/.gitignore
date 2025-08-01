@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# .gitignore file
+# ... other gitignore rules
+
+# Environment variables
+.env
+.env.local
