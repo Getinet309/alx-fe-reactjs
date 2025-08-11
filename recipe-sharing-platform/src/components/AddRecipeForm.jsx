@@ -4,7 +4,8 @@ import { useState } from 'react';
 const AddRecipeForm = () => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [instructions, setInstructions] = useState('');
+  // Corrected: using 'steps' instead of 'instructions'
+  const [steps, setSteps] = useState(''); 
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
@@ -18,20 +19,21 @@ const AddRecipeForm = () => {
     if (!ingredients.trim()) {
       newErrors.ingredients = 'Ingredients are required.';
     }
-    if (!instructions.trim()) {
-      newErrors.instructions = 'Instructions are required.';
+    // Corrected: checking for 'steps' instead of 'instructions'
+    if (!steps.trim()) {
+      newErrors.steps = 'Preparation steps are required.'; 
     }
 
     // Set errors and check if the form is valid
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       // Form is valid, process the data
-      console.log('Form submitted:', { title, ingredients, instructions });
+      console.log('Form submitted:', { title, ingredients, steps });
 
       // Clear the form fields after successful submission
       setTitle('');
       setIngredients('');
-      setInstructions('');
+      setSteps(''); // Corrected: resetting 'steps'
       setErrors({});
     }
   };
@@ -71,18 +73,21 @@ const AddRecipeForm = () => {
           </div>
 
           <div>
-            <label htmlFor="instructions" className="block text-sm font-medium text-gray-700 mb-1">
+            {/* Corrected: Label and htmlFor for 'steps' */}
+            <label htmlFor="steps" className="block text-sm font-medium text-gray-700 mb-1">
               Preparation Steps
             </label>
             <textarea
-              id="instructions"
+              // Corrected: id for 'steps'
+              id="steps"
               rows="6"
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
+              value={steps}
+              onChange={(e) => setSteps(e.target.value)}
               className="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500"
               placeholder="Enter each step on a new line."
             ></textarea>
-            {errors.instructions && <p className="mt-1 text-sm text-red-500">{errors.instructions}</p>}
+            {/* Corrected: displaying errors for 'steps' */}
+            {errors.steps && <p className="mt-1 text-sm text-red-500">{errors.steps}</p>}
           </div>
 
           <button
