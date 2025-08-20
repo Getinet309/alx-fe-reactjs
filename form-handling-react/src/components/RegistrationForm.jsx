@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 
+/**
+ * A controlled component for a user registration form.
+ * This form manages its state using a single object, which is a common and efficient pattern in React.
+ */
 const RegistrationForm = () => {
-  // 1. A single state object `formData` holds all the form's data.
-  // This is a common and efficient pattern in React.
+  // Use a single useState hook to manage all form data.
+  // This object-based approach is more scalable than using a separate state variable for each input.
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
   });
+
+  // State for storing validation errors.
   const [errors, setErrors] = useState({});
 
-  // 2. A single, generic handleChange function updates the state.
+  /**
+   * Generic handler for all input changes.
+   * It uses the input's 'name' attribute to update the correct property in the formData state object.
+   * @param {object} e - The event object from the input.
+   */
   const handleChange = (e) => {
-    // It uses the `name` attribute of each input to update the correct property in `formData`.
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -20,6 +29,9 @@ const RegistrationForm = () => {
     }));
   };
 
+  /**
+   * Validates the form data and returns an object of errors.
+   */
   const validate = () => {
     const newErrors = {};
     if (!formData.username) {
@@ -34,14 +46,22 @@ const RegistrationForm = () => {
     return newErrors;
   };
 
+  /**
+   * Handles the form submission.
+   * Prevents default form behavior and performs validation before processing.
+   * @param {object} e - The event object from the form submission.
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
 
+    // If there are no validation errors, proceed with submission logic.
     if (Object.keys(validationErrors).length === 0) {
       console.log('Form data submitted:', formData);
+      // In a real application, you would send this data to an API here.
       alert('Registration Successful!');
+      // Clear the form after successful submission.
       setFormData({
         username: '',
         email: '',
@@ -62,7 +82,8 @@ const RegistrationForm = () => {
             type="text"
             id="username"
             name="username"
-            // The `value` prop is bound to a property of the `formData` object.
+            // The value is bound to a property of the formData object,
+            // not a separate state variable.
             value={formData.username}
             onChange={handleChange}
             style={{ width: '100%', padding: '8px', margin: '5px 0' }}
@@ -75,7 +96,7 @@ const RegistrationForm = () => {
             type="email"
             id="email"
             name="email"
-            // The `value` prop is bound to a property of the `formData` object.
+            // The value is bound to a property of the formData object.
             value={formData.email}
             onChange={handleChange}
             style={{ width: '100%', padding: '8px', margin: '5px 0' }}
@@ -88,7 +109,7 @@ const RegistrationForm = () => {
             type="password"
             id="password"
             name="password"
-            // The `value` prop is bound to a property of the `formData` object.
+            // The value is bound to a property of the formData object.
             value={formData.password}
             onChange={handleChange}
             style={{ width: '100%', padding: '8px', margin: '5px 0' }}
