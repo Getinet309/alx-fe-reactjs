@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
+  // 1. A single state object `formData` holds all the form's data.
+  // This is a common and efficient pattern in React.
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -8,7 +10,9 @@ const RegistrationForm = () => {
   });
   const [errors, setErrors] = useState({});
 
+  // 2. A single, generic handleChange function updates the state.
   const handleChange = (e) => {
+    // It uses the `name` attribute of each input to update the correct property in `formData`.
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -36,7 +40,6 @@ const RegistrationForm = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      // Logic for form submission
       console.log('Form data submitted:', formData);
       alert('Registration Successful!');
       setFormData({
@@ -59,6 +62,7 @@ const RegistrationForm = () => {
             type="text"
             id="username"
             name="username"
+            // The `value` prop is bound to a property of the `formData` object.
             value={formData.username}
             onChange={handleChange}
             style={{ width: '100%', padding: '8px', margin: '5px 0' }}
@@ -71,6 +75,7 @@ const RegistrationForm = () => {
             type="email"
             id="email"
             name="email"
+            // The `value` prop is bound to a property of the `formData` object.
             value={formData.email}
             onChange={handleChange}
             style={{ width: '100%', padding: '8px', margin: '5px 0' }}
@@ -83,6 +88,7 @@ const RegistrationForm = () => {
             type="password"
             id="password"
             name="password"
+            // The `value` prop is bound to a property of the `formData` object.
             value={formData.password}
             onChange={handleChange}
             style={{ width: '100%', padding: '8px', margin: '5px 0' }}
