@@ -39,7 +39,6 @@ const RegistrationForm = () => {
       // Logic for form submission
       console.log('Form data submitted:', formData);
       alert('Registration Successful!');
-      // Reset form
       setFormData({
         username: '',
         email: '',
