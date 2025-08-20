@@ -2,31 +2,40 @@ import React, { useState } from 'react';
 
 /**
  * A controlled component for a user registration form.
- * This form manages its state using a single object, which is a common and efficient pattern in React.
+ * This form manages its state using separate useState hooks for each input field.
+ * This is a less common but still valid pattern for controlled components.
  */
 const RegistrationForm = () => {
-  // Use a single useState hook to manage all form data.
-  // This object-based approach is more scalable than using a separate state variable for each input.
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
+  // Use separate useState hooks for each input field.
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   // State for storing validation errors.
   const [errors, setErrors] = useState({});
 
   /**
-   * Generic handler for all input changes.
-   * It uses the input's 'name' attribute to update the correct property in the formData state object.
+   * Dedicated handler for the username input.
    * @param {object} e - The event object from the input.
    */
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  /**
+   * Dedicated handler for the email input.
+   * @param {object} e - The event object from the input.
+   */
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  /**
+   * Dedicated handler for the password input.
+   * @param {object} e - The event object from the input.
+   */
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
   };
 
   /**
@@ -34,13 +43,13 @@ const RegistrationForm = () => {
    */
   const validate = () => {
     const newErrors = {};
-    if (!formData.username) {
+    if (!username) {
       newErrors.username = 'Username is required';
     }
-    if (!formData.email) {
+    if (!email) {
       newErrors.email = 'Email is required';
     }
-    if (!formData.password) {
+    if (!password) {
       newErrors.password = 'Password is required';
     }
     return newErrors;
@@ -58,15 +67,13 @@ const RegistrationForm = () => {
 
     // If there are no validation errors, proceed with submission logic.
     if (Object.keys(validationErrors).length === 0) {
-      console.log('Form data submitted:', formData);
+      console.log('Form data submitted:', { username, email, password });
       // In a real application, you would send this data to an API here.
       alert('Registration Successful!');
       // Clear the form after successful submission.
-      setFormData({
-        username: '',
-        email: '',
-        password: '',
-      });
+      setUsername('');
+      setEmail('');
+      setPassword('');
     } else {
       console.log('Validation errors:', validationErrors);
     }
@@ -82,10 +89,9 @@ const RegistrationForm = () => {
             type="text"
             id="username"
             name="username"
-            // The value is bound to a property of the formData object,
-            // not a separate state variable.
-            value={formData.username}
-            onChange={handleChange}
+            // The value is bound to the separate 'username' state variable.
+            value={username}
+            onChange={handleUsernameChange}
             style={{ width: '100%', padding: '8px', margin: '5px 0' }}
           />
           {errors.username && <p style={{ color: 'red', fontSize: '12px' }}>{errors.username}</p>}
@@ -96,9 +102,9 @@ const RegistrationForm = () => {
             type="email"
             id="email"
             name="email"
-            // The value is bound to a property of the formData object.
-            value={formData.email}
-            onChange={handleChange}
+            // The value is bound to the separate 'email' state variable.
+            value={email}
+            onChange={handleEmailChange}
             style={{ width: '100%', padding: '8px', margin: '5px 0' }}
           />
           {errors.email && <p style={{ color: 'red', fontSize: '12px' }}>{errors.email}</p>}
@@ -109,9 +115,9 @@ const RegistrationForm = () => {
             type="password"
             id="password"
             name="password"
-            // The value is bound to a property of the formData object.
-            value={formData.password}
-            onChange={handleChange}
+            // The value is bound to the separate 'password' state variable.
+            value={password}
+            onChange={handlePasswordChange}
             style={{ width: '100%', padding: '8px', margin: '5px 0' }}
           />
           {errors.password && <p style={{ color: 'red', fontSize: '12px' }}>{errors.password}</p>}
