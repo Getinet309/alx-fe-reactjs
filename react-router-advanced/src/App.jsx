@@ -82,7 +82,7 @@ export default function App() {
               <Link to="/" className="text-gray-600 hover:text-blue-600 transition-colors">Home</Link>
               <Link to="/profile" className="text-gray-600 hover:text-blue-600 transition-colors">Profile</Link>
               <Link to="/post/1" className="text-gray-600 hover:text-blue-600 transition-colors">Post 1</Link>
-              <Link to="/post/2" className="text-gray-600 hover:text-blue-600 transition-colors">Post 2</Link>
+              <Link to="/blog/1" className="text-gray-600 hover:text-blue-600 transition-colors">Blog Post 1</Link>
               <AuthStatus />
             </nav>
           </header>
@@ -102,6 +102,7 @@ export default function App() {
               />
               {/* Dynamic Route for blog posts */}
               <Route path="/post/:id" element={<Post posts={posts} />} />
+              <Route path="/blog/:id" element={<BlogPost posts={posts} />} />
               {/* Catch-all route for 404 pages */}
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -192,6 +193,27 @@ const Post = ({ posts }) => {
   return (
     <div className="p-8 bg-white shadow-md rounded-lg">
       <h2 className="text-3xl font-bold mb-2">{post.title}</h2>
+      <p className="text-gray-600">{post.content}</p>
+    </div>
+  );
+};
+
+// Component for a blog post, using a dynamic route.
+const BlogPost = ({ posts }) => {
+  const { id } = useParams();
+  const post = posts.find((p) => p.id === parseInt(id));
+
+  if (!post) {
+    return (
+      <div className="p-8 text-center bg-red-100 border border-red-400 text-red-700 rounded-lg">
+        <h2 className="text-xl font-semibold">Blog Post Not Found!</h2>
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-8 bg-white shadow-md rounded-lg">
+      <h2 className="text-3xl font-bold mb-2">{`Blog: ${post.title}`}</h2>
       <p className="text-gray-600">{post.content}</p>
     </div>
   );
