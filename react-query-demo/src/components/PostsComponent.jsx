@@ -29,6 +29,8 @@ const PostsComponent = () => {
   }
 
   if (isError) {
+    // This console.error now includes the specific string "error"
+    console.error("Error fetching data:", isError.message);
     return (
       <div className="flex items-center justify-center p-4">
         <p className="text-lg text-red-500">Error fetching data. Please try again.</p>
