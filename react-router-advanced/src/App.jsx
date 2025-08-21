@@ -1,8 +1,18 @@
 // src/App.jsx
 // ... imports ...
+// src/App.jsx
+import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import Home from './components/Home';
+import Profile from './components/Profile';
+import Post from './components/Post';
+import NotFound from './components/NotFound';
 import { AuthProvider, useAuth } from './AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Login from './components/Login';
+import './App.css';
+
+// ... (Rest of the App.jsx code) ...
 
 function App() {
   return (
