@@ -15,8 +15,14 @@ const PostsComponent = () => {
   // The useQuery hook manages the data fetching lifecycle.
   // It takes a unique key ('posts') and the async function to fetch data.
   const { data, isLoading, isError, refetch } = useQuery('posts', fetchPosts, {
+    // How long a query's data remains in the cache after it becomes unused.
+    cacheTime: 300000, // 5 minutes
     // staleTime sets how long data is considered "fresh" before a background refetch is triggered.
     staleTime: 5000,
+    // When the browser window is refocused, this will automatically trigger a refetch if the data is stale.
+    refetchOnWindowFocus: true,
+    // This keeps the previous data visible while a new query is being fetched in the background.
+    keepPreviousData: true,
   });
 
   // Conditional rendering based on the query state.
@@ -29,8 +35,6 @@ const PostsComponent = () => {
   }
 
   if (isError) {
-    // This console.error now includes the specific string "error"
-    console.error("Error fetching data:", isError.message);
     return (
       <div className="flex items-center justify-center p-4">
         <p className="text-lg text-red-500">Error fetching data. Please try again.</p>
