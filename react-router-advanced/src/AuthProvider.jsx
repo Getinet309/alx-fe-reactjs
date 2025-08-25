@@ -1,7 +1,6 @@
-// src/AuthContext.jsx
-import React, { createContext, useContext, useState } from 'react';
-
-const AuthContext = createContext(null);
+// src/AuthProvider.jsx
+import React, { useState } from 'react';
+import { AuthContext } from './auth'; // Import from the new file
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -15,5 +14,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
-export const useAuth = () => useContext(AuthContext);
